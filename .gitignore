@@ -1,0 +1,5 @@
+.venv
+.env
+.coverage
+logs
+*.pyc

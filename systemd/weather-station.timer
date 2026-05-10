@@ -1,0 +1,13 @@
+[Unit]
+Description=NOAA Weather Satellite Ground Station timer (one-shot mode)
+Documentation=Use this timer only when running weather-station in one-shot mode.
+After=network-online.target
+
+[Timer]
+# Run once at boot after 2 minutes, then every 6 hours
+OnBootSec=2min
+OnUnitActiveSec=6h
+Unit=weather-station.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,25 @@
+[Unit]
+Description=NOAA Weather Satellite Ground Station
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/weather-station
+EnvironmentFile=-/home/pi/weather-station/.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PATH=/home/pi/weather-station/.venv/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/pi/weather-station/.venv/bin/python -m weather_station.main
+Restart=on-failure
+RestartSec=60
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=weather-station
+
+# Allow access to RTL-SDR USB device
+SupplementaryGroups=plugdev
+
+[Install]
+WantedBy=multi-user.target

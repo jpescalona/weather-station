@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "weather-station"
+version = "0.1.0"
+description = "Automated NOAA weather satellite ground station for Raspberry Pi with RTL-SDR"
+authors = ["Weather Station <station@localhost>"]
+packages = [{ include = "weather_station" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+ephem = "^4.1.5"
+pyyaml = "^6.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-cov = "^5.0.0"
+pytest-mock = "^3.12.0"
+
+[tool.poetry.scripts]
+weather-station = "weather_station.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=weather_station --cov-report=term-missing"
+
+[tool.coverage.run]
+omit = ["tests/*"]
