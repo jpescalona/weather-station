@@ -16,16 +16,19 @@ class Receiver:
         rtl_sample_rate: int = 60000,
         final_sample_rate: int = 11025,
         ppm: int = 0,
+        device_index: int = 0,
     ):
         self.recordings_dir = Path(recordings_dir)
         self.gain = gain
         self.rtl_sample_rate = rtl_sample_rate
         self.final_sample_rate = final_sample_rate
         self.ppm = ppm
+        self.device_index = device_index
 
     def _build_commands(self, frequency: int, output_file: Path) -> tuple[list[str], list[str]]:
         rtl_fm = [
             "rtl_fm",
+            "-d", str(self.device_index),
             "-f", str(frequency),
             "-M", "wbfm",
             "-s", str(self.rtl_sample_rate),  # wide capture bandwidth for APT signal

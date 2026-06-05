@@ -189,6 +189,7 @@ def cmd_receive(config: Config, satellite_name: str, duration_seconds: int) -> b
         rtl_sample_rate=config.capture.rtl_sample_rate,
         final_sample_rate=config.capture.final_sample_rate,
         ppm=config.capture.ppm,
+        device_index=config.capture.device_index,
     )
     decoder = Decoder()
     cleaner = Cleaner(delete_wav=config.cleanup.delete_wav, delete_png=config.cleanup.delete_png)
@@ -268,7 +269,8 @@ def cmd_scan(config: Config) -> None:
     try:
         with _paused_services(config.capture.competing_services):
             subprocess.run(
-                ["rtl_power", "-f", "137.0M:138.0M:5k", "-i", "2", "-1", str(scan_file)],
+                ["rtl_power", "-d", str(config.capture.device_index),
+                 "-f", "137.0M:138.0M:5k", "-i", "2", "-1", str(scan_file)],
                 capture_output=True, timeout=20,
             )
     except FileNotFoundError:

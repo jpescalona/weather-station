@@ -24,6 +24,7 @@ class CaptureConfig:
     final_sample_rate: int = 11025
     gain: float = 44.5
     ppm: int = 0
+    device_index: int = 0
     min_elevation: float = 20.0
     pre_record_seconds: int = 30
     post_record_seconds: int = 30

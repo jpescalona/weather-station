@@ -19,11 +19,13 @@ capture:
   final_sample_rate: 11025  # output rate required by noaa-apt
   gain: 44.5                # dB — slightly higher for urban environment (Fuengirola)
   ppm: 0                    # frequency error correction; 0 for RTL-SDR V3
+  device_index: 1           # RTL-SDR device index (0-based); check with: sudo rtl_test
   min_elevation: 20
   pre_record_seconds: 30
   post_record_seconds: 30
-  competing_services:
-    - dump1090-fa
+  competing_services: []
+  #  - dump1090-fa         # If you run this and dump1090-fa (or any other system process),
+                           # this stops the daemon to free the capture device to perform the scan
 
 tle:
   file: "/tmp/weather-station/noaa_tle.txt"

@@ -141,6 +141,7 @@ def main() -> None:
         rtl_sample_rate=config.capture.rtl_sample_rate,
         final_sample_rate=config.capture.final_sample_rate,
         ppm=config.capture.ppm,
+        device_index=config.capture.device_index,
     )
     decoder = Decoder()
     cleaner = Cleaner(
